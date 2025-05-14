@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para ti, mi amor 🐱💖</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      animation: fadeIn 2s ease-in-out;
+      z-index: 2;
+      position: relative;
+    }
+
+    p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: 20px auto;
+      background: #ff4081;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #ffffff26;
+      z-index: 2;
+      position: relative;
+      min-height: 120px;
+      white-space: pre-line;
+    }
+
+    .btn {
+      background-color: #ff4081;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1em;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background 0.3s;
+      z-index: 2;
+      position: relative;
+    }
+
+    .btn:hover {
+      background-color: #e91e63;
+    }
+
+    #sorpresa {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2em;
+      background-color: #ff4081;
+      padding: 15px;
+      border-radius: 10px;
+      color: #fcfcfc;
+      animation: fadeIn 2s ease-in-out;
+      z-index: 2;
+      position: relative;
+    }
+
+    #extra-btn {
+      display: none;
+    }
+
+    /* DISPLAY BARS - EFECTO OLA FONDO COMPLETO */
+    #bars-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      z-index: 0;
+      pointer-events: none;
+      align-items: flex-end;
+      justify-content: space-around;
+    }
+
+    .bar {
+      width: 2%;
+      height: 20%;
+      background: linear-gradient(180deg, #ff6f91, #d65db1, #845ec2);
+      opacity: 0.2;
+      border-radius: 10px;
+      animation: wave 1.5s infinite ease-in-out;
+      filter: drop-shadow(0 0 5px white);
+      transform-origin: bottom;
+    }
+
+    .bar:nth-child(odd) { animation-delay: 0.2s; }
+    .bar:nth-child(even) { animation-delay: 0.5s; }
+    .bar:nth-child(3n) { animation-delay: 0.8s; }
+
+    @keyframes wave {
+      0%, 100% { transform: scaleY(0.5); opacity: 0.2; }
+      50% { transform: scaleY(2); opacity: 0.5; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .star {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out;
+      opacity: 0.8;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Estrellas parpadeantes -->
+  <script>
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = Math.random() * 100 + "vh";
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.animationDuration = (1 + Math.random() * 2) + "s";
+      star.style.opacity = Math.random();
+      document.body.appendChild(star);
+    }
+  </script>
+
+  <!-- Barras -->
+  <div id="bars-bg"></div>
+
+  <h1>Hola, mi amor 🐱💖</h1>
+  <p id="typed-text"></p>
+
+  <button class="btn" onclick="toggleMusic()">🎵 PLay / Pause</button>
+  <audio id="bg-music" src="cancion.mp3" loop></audio>
+
+  <button class="btn" onclick="mostrarSorpresa()">✨ En medio del caos, tú</button>
+  <div id="sorpresa">
+
+    Aunque el mundo pese más de lo que puedo,
+    aunque mi mente se nuble y mi alma tiemble,
+    no hay sombra ni tormenta que me impida ver
+    que tú eres mi sol, mi paz, mi siempre.
+    
+    Estoy cruzando días duros, cielo gris,
+    momentos donde a veces dudo de mí.
+    Pero de ti, amor, nunca he dudado,
+    mi amor por ti jamás ha flaqueado.
+    
+    Si ves mis silencios, no son desamor,
+    son gritos callados buscando calor.
+    Y tú, mi refugio, mi calma, mi hogar,
+    eres lo único firme que me hace luchar.
+    
+    No hay distancia, ni dolor, ni temor,
+    que cambie el hecho de que te amo, mi amor.
+    Con todo mi ser, con lo poco o mucho que soy,
+    te elijo, te pienso, te abrazo… estoy.</div>
+
+  <!-- Botón que aparece solo si suena la música -->
+ <!-- Botón que aparece solo si suena la música -->
+<button id="extra-btn" class="btn" onclick="fraseAmor()">Te amo más 💘</button>
+
+
+  <script>
+    const audio = document.getElementById("bg-music");
+    const barsBg = document.getElementById("bars-bg");
+    const extraBtn = document.getElementById("extra-btn");
+
+    // Crear barras
+    for (let i = 0; i < 50; i++) {
+      const bar = document.createElement("div");
+      bar.classList.add("bar");
+      barsBg.appendChild(bar);
+    }
+
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+        barsBg.style.display = "flex";
+        extraBtn.style.display = "inline-block";
+      } else {
+        audio.pause();
+        barsBg.style.display = "none";
+        extraBtn.style.display = "none";
+      }
+    }
+
+    function mostrarSorpresa() {
+  const sorpresa = document.getElementById("sorpresa");
+  if (sorpresa.style.display === "block") {
+    sorpresa.style.display = "none";
+  } else {
+    sorpresa.style.display = "block";
+  }
+}
+
+
+    // Animación máquina de escribir
+    const mensaje = `En este rincón de la web solo existes tú,
+con tus ojitos brillando más que el arcoíris en mi pantalla.
+Te amo con todo mi código, mi lógica... y mi corazón. 💻❤️`;
+
+    const typedText = document.getElementById("typed-text");
+    let i = 0;
+
+    function escribirTexto() {
+      if (i < mensaje.length) {
+        typedText.innerHTML += mensaje.charAt(i);
+        i++;
+        setTimeout(escribirTexto, 40);
+      }
+    }
+
+    window.onload = escribirTexto;
+    
+  const frases = [
+    "Más que ayer, menos que mañana 💕",
+    "Te pienso en binario: 1 para siempre 💻❤️",
+    "Eres mi error favorito 🐞❤️",
+    "Si fueras código, serías el más limpio y perfecto 😻",
+    "Ctrl + S para guardar este amor 🖱️💾"
+  ];
+
+  let fraseIndex = 0;
+
+  function fraseAmor() {
+    alert(frases[fraseIndex]);
+    fraseIndex = (fraseIndex + 1) % frases.length;
+  }
+</script>
+
+  </script>
+</body>
+</html>
